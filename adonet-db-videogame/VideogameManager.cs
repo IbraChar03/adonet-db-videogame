@@ -135,11 +135,11 @@ namespace adonet_db_videogame
                 {
                     List<Videogame> list = new List<Videogame>();
                     connessione.Open();
-                    string query = "SELECT * FROM videogames  WHERE videogames.name LIKE '%@parola%'";
+                    string query = "SELECT * FROM videogames  WHERE videogames.name LIKE @parola";
                     //SqlCommand cmd = new SqlCommand(query, connessione);
                     SqlCommand cmd = connessione.CreateCommand();
                     cmd.CommandText = query;
-                    cmd.Parameters.Add(new SqlParameter("@parola", parola));
+                    cmd.Parameters.Add(new SqlParameter("@parola","%" +  parola + "%"));
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
