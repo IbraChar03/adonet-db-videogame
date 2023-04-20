@@ -11,7 +11,7 @@ namespace adonet_db_videogame
 {
     internal class VideogameManager
     {
-        public static void InserisciVideogame(string name, string overview, string date, long softwareId)
+        public static void InserisciVideogame(Videogame videogame)
         {
             string stringaConnessione = "Data Source=localhost;Initial Catalog=videogame;Integrated Security=True";
             using (SqlConnection connessione = new SqlConnection(stringaConnessione))
@@ -21,10 +21,10 @@ namespace adonet_db_videogame
                     connessione.Open();
                     string query = "INSERT INTO videogames(name,overview,release_date,software_house_id) VALUES (@name,@overview,@date,@softwareId) ";
                     SqlCommand cmd = new SqlCommand(query, connessione);
-                    cmd.Parameters.Add(new SqlParameter("@name", name));
-                    cmd.Parameters.Add(new SqlParameter("@overview", overview));
-                    cmd.Parameters.Add(new SqlParameter("@date", date));
-                    cmd.Parameters.Add(new SqlParameter("@softwareId", softwareId));
+                    cmd.Parameters.Add(new SqlParameter("@name", videogame.Name));
+                    cmd.Parameters.Add(new SqlParameter("@overview", videogame.Overview));
+                    cmd.Parameters.Add(new SqlParameter("@date", videogame.Date));
+                    cmd.Parameters.Add(new SqlParameter("@softwareId", videogame.SoftwareHouseId));
                     int righe = cmd.ExecuteNonQuery();
 
                 }

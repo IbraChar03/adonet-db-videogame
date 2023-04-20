@@ -26,7 +26,7 @@
                             string date = Console.ReadLine();
                             Console.Write("Inserisci id della software house : ");
                             long softwareHouseId = Convert.ToInt64(Console.ReadLine());
-                            VideogameManager.InserisciVideogame(name, overview, date, softwareHouseId);
+                            VideogameManager.InserisciVideogame(new Videogame(name,overview,date,softwareHouseId));
                         }
                         catch(Exception e)
                         {
