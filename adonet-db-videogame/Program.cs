@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            VideogameManager.InserisciVideogame("prova", "descrizione", "10/10/2021", 2);
         }
     }
 }

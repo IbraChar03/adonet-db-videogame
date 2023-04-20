@@ -19,12 +19,10 @@ namespace adonet_db_videogame
                 {
                     connessione.Open();
                     string query = "INSERT INTO videogames(name,overview,release_date,software_house_id) VALUES (@name,@overview,@date,@softwareId) ";
-                    DateOnly dateOnly = DateOnly.ParseExact(date, "d");
-                    Console.WriteLine(dateOnly);
-                     SqlCommand cmd = new SqlCommand(query,connessione);
+                    SqlCommand cmd = new SqlCommand(query,connessione);
                     cmd.Parameters.Add(new SqlParameter("@name", name));
                     cmd.Parameters.Add(new SqlParameter("@overview", overview));
-                    cmd.Parameters.Add(new SqlParameter("@date", dateOnly));
+                    cmd.Parameters.Add(new SqlParameter("@date", date));
                     cmd.Parameters.Add(new SqlParameter("@softwareId", softwareId));
                     int righe = cmd.ExecuteNonQuery();
 
