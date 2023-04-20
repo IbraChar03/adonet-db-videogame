@@ -105,12 +105,12 @@ namespace adonet_db_videogame
                             string overview = reader.GetString(indexOverview);
                             int indexDate = reader.GetOrdinal("release_date");
                             DateTime date = reader.GetDateTime(indexDate);
-                            DateOnly dateOnly = DateOnly.FromDateTime(date);
+                            string datestring = date.ToString("dd/MM/yyyy");
                             int indexSoftwareHouse = reader.GetOrdinal("software_house_id");
                             long softwareHouse = reader.GetInt64(indexSoftwareHouse);
-                            Console.WriteLine($"Nome videogioco : {name}");
-                            Console.WriteLine($"Riassunto videogioco : {overview}");
-                            Console.WriteLine($"Data di rilascio videogioco : {dateOnly}");
+                            Videogame vd = new Videogame(name, overview, datestring, softwareHouse);
+                            vd.StampaVideogame();
+
                         }
                     }
 
