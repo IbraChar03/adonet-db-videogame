@@ -8,7 +8,8 @@
             Console.WriteLine("Inserisci videogioco");
             Console.WriteLine("Rimuovi videogioco");
             Console.WriteLine("Aggiorna videogioco");
-            Console.WriteLine("Cerca videogioco");
+            Console.WriteLine("Cerca videogioco tramite id ");
+            Console.WriteLine("Cerca videogiochi");
             Console.WriteLine("Esci");
             Console.Write("Scrivi la tua scelta : ");
             string scelta = Console.ReadLine();
@@ -62,7 +63,7 @@
                     }
 
                         break;
-                    case "Cerca videogioco":
+                    case "Cerca videogioco tramite id":
                     try
                     {
                         Console.Write("Inserisci l`id del videogioco da cercare : ");
@@ -76,7 +77,21 @@
                     }
 
                         break;
-                    case "Esci":
+                case "Cerca videogiochi":
+                    try
+                    {
+                        Console.Write("Inserisci la parola : ");
+                       string parola = Console.ReadLine();
+                        VideogameManager.CercaVideogiochi(parola);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                    break;
+                case "Esci":
                     Console.Write("Arrivederci");
                         break;
             }

@@ -11,6 +11,7 @@ namespace adonet_db_videogame
 {
     internal class VideogameManager
     {
+ 
         public static void InserisciVideogame(Videogame videogame)
         {
             string stringaConnessione = "Data Source=localhost;Initial Catalog=videogame;Integrated Security=True";
@@ -93,7 +94,9 @@ namespace adonet_db_videogame
                 {
                     connessione.Open();
                     string query = "SELECT * FROM videogames  WHERE videogames.id=@id";
-                    SqlCommand cmd = new SqlCommand(query, connessione);
+                    //SqlCommand cmd = new SqlCommand(query, connessione);
+                    SqlCommand cmd = connessione.CreateCommand();
+                    cmd.CommandText = query;
                     cmd.Parameters.Add(new SqlParameter("@id", id));
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -114,6 +117,52 @@ namespace adonet_db_videogame
                         }
                     }
 
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        public static void CercaVideogiochi(string parola)
+        {
+            string stringaConnessione = "Data Source=localhost;Initial Catalog=videogame;Integrated Security=True";
+            using (SqlConnection connessione = new SqlConnection(stringaConnessione))
+            {
+                try
+                {
+                    List<Videogame> list = new List<Videogame>();
+                    connessione.Open();
+                    string query = "SELECT * FROM videogames  WHERE videogames.name LIKE '%@parola%'";
+                    //SqlCommand cmd = new SqlCommand(query, connessione);
+                    SqlCommand cmd = connessione.CreateCommand();
+                    cmd.CommandText = query;
+                    cmd.Parameters.Add(new SqlParameter("@parola", parola));
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int indexName = reader.GetOrdinal("name");
+                            string name = reader.GetString(indexName);
+                            int indexOverview = reader.GetOrdinal("overview");
+                            string overview = reader.GetString(indexOverview);
+                            int indexDate = reader.GetOrdinal("release_date");
+                            DateTime date = reader.GetDateTime(indexDate);
+                            string datestring = date.ToString("dd/MM/yyyy");
+                            int indexSoftwareHouse = reader.GetOrdinal("software_house_id");
+                            long softwareHouse = reader.GetInt64(indexSoftwareHouse);
+                            Videogame vd = new Videogame(name, overview, datestring, softwareHouse);
+                            list.Add(vd);
+
+                        }
+                        foreach (Videogame vd in list)
+                        {
+                            vd.StampaVideogame();
+                        }
+                    }
+                  
 
                 }
                 catch (Exception e)
