@@ -11,7 +11,7 @@ namespace adonet_db_videogame
 {
     internal class VideogameManager
     {
-        public static void InserisciVideogame(string name, string overview, string date, int softwareId)
+        public static void InserisciVideogame(string name, string overview, string date, long softwareId)
         {
             string stringaConnessione = "Data Source=localhost;Initial Catalog=videogame;Integrated Security=True";
             using (SqlConnection connessione = new SqlConnection(stringaConnessione))
@@ -84,7 +84,7 @@ namespace adonet_db_videogame
 
 
         }
-        public static void GetVideogameById(int id)
+        public static void GetVideogameById(long id)
         {
             string stringaConnessione = "Data Source=localhost;Initial Catalog=videogame;Integrated Security=True";
             using (SqlConnection connessione = new SqlConnection(stringaConnessione))
